@@ -22,7 +22,7 @@ class MoneyHelperSpec extends ObjectBehavior
 {
     function let(CurrencyContextInterface $currencyContext, CurrencyConverterInterface $converter)
     {
-        $this->beConstructedWith($currencyContext, $converter, 'en');
+        $this->beConstructedWith($currencyContext, $converter, new \NumberFormatter('en',\NumberFormatter::CURRENCY));
     }
 
     function it_is_initializable()

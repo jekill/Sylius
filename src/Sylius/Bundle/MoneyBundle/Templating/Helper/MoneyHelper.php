@@ -32,17 +32,11 @@ class MoneyHelper extends Helper
      */
     private $formatter;
 
-    /**
-     * @var string
-     */
-    private $pattern = '¤#,##0.00;-¤#,##0.00';
-
-    public function __construct(CurrencyContextInterface $currencyContext, CurrencyConverterInterface $converter, $locale = null)
+    public function __construct(CurrencyContextInterface $currencyContext, CurrencyConverterInterface $converter, \NumberFormatter $formatter)
     {
         $this->currencyContext = $currencyContext;
         $this->converter       = $converter;
-        $this->formatter       = new \NumberFormatter($locale ?: \Locale::getDefault(), \NumberFormatter::CURRENCY);
-        $this->formatter->setPattern($this->pattern);
+        $this->formatter       = $formatter;
     }
 
     /**

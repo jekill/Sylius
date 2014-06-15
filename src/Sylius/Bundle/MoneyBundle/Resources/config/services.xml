@@ -21,6 +21,8 @@
         <parameter key="sylius.form.type.exchange_rate.class">Sylius\Bundle\MoneyBundle\Form\Type\ExchangeRateType</parameter>
         <parameter key="sylius.currency_context.class">Sylius\Bundle\MoneyBundle\Context\CurrencyContext</parameter>
         <parameter key="sylius.currency_converter.class">Sylius\Component\Money\Converter\CurrencyConverter</parameter>
+        <parameter key="sylius.currency_formatter.class">NumberFormatter</parameter>
+        <parameter key="sylius.currency_formatter.pattern">¤#,##0.00;-¤#,##0.00</parameter>
     </parameters>
 
     <services>
@@ -53,6 +55,13 @@
         </service>
         <service id="sylius.currency_converter" class="%sylius.currency_converter.class%">
             <argument type="service" id="sylius.repository.exchange_rate" />
+        </service>
+        <service id="sylius.currency_formatter" class="%sylius.currency_formatter.class%">
+            <argument>%sylius.money.locale%</argument>
+            <argument type="constant">\NumberFormatter::CURRENCY</argument>
+            <call method="setPattern">
+                <argument>%sylius.currency_formatter.pattern%</argument>
+            </call>
         </service>
     </services>
 
